@@ -66,10 +66,14 @@ print(geek)
 Syntax : tokenize.RegexpTokenizer()
 Return : Return array of tokens using regular expression
 
-tokenisation - it's  be hard to understand the sentiment through letter tokenisation (listen ans silent ) same letters 
-so go for word tokenisation 
+
+tokenisation - The BERT tokenizer is a crucial component of the BERT (Bidirectional Encoder Representations from Transformers) model. 
+It converts input text into a numerical format suitable for the model. The tokenizer breaks down the text into smaller units called 
+tokens and maps them to corresponding IDs in the model's vocabulary. 
 i love my dog (001 , 002 , 003 , 004) i love my cat (001 , 002 , 003 , 005)
 and for encoding these sentence maitain the length by masking (adding 0)
+
+INPUT MASK - Input masking in BERT plays a crucial role in ensuring that the model processes only meaningful input tokens and ignores padding tokens.
 
 and then use sigmoid fynction to get the value b/w 0-1 and set the treshold value then classify this ,
  traning and testing
