@@ -1,23 +1,32 @@
 # FINE-TUNE-BERT((Bidirectional Encoder Representations from Transformers)-FOR-TEXT CLASSIFICATION-WITH-TENSERFLOW
 //Why we use BERT 
----It's is a pre-trained modle availablr in TRANSFORMARE Library of rensoflow that help categories like positive/bnegetive ect.
+---It's is a pre-trained modle availablr in TRANSFORMARE Library of tensoflow that help categories like positive/bnegetive ect.
 //NLP stands for Natural Language Processing. It gives the ability to machine understand and process human languages. Human languages can be in the form of text or audio format.
 ----advantage - NLP helps us to analyse data from both structured and unstructured sources.
 NLP is very fast and time efficient.
 ----disadvantage - NLP  require huge data 
 -----APPLICATION - text classification , audio processing 
 
-//Tensorflow - it is an ipen source libery for ml and deep ai,that provide the extensive tools for NLP.
+//Tensorflow - it is an open source libery for ml and deep ai,that provide the extensive tools for NLP.
 ---use for tenssorflow for NLP 
 1.Tokenization processing 
 2.sentimaent analiysing 
 3.Text generations 
 
-//WE are using Tensor flow 2 - 
-1.Enabled by default (dynamic, imperative execution).
-2.Simplified APIs and more Pythonic code.
-3.Keras is the central high-level API (tf.keras).
-4.Easier debugging with eager exe
+//When to Use:
+Use TensorFlow if:
+
+You want to build and train custom models from scratch.
+Your use case requires a highly customized solution.
+Use TensorFlow-Hub if:
+
+You want to leverage pre-trained models for quick implementation.
+You're working on transfer learning tasks and need to save time and resources.
+
+IMPORT THE QUORA INSTATNACE DATASET 
+Why Would You Use Eager Mode in BERT Sentiment Analysis?
+Debugging: You might enable eager mode while building or fine-tuning a BERT model to inspect tokenized inputs, embeddings, or outputs dynamically.
+Development: Helps during prototyping or experimentation stages when you're testing preprocessing steps or tweaking hyperparameters.
 
 CREATE A DATASET FOR TARNNIGN AND EVALUATION -
 step 1 - train_test_split -A function from the sklearn.model_selection module use for spliting the dataset in test , traning and validation set of size .0075 for train set and 0.00075 for validation set .
@@ -26,6 +35,25 @@ Pandas DataFrame values (question_text and target) are converted into TensorFlow
 step 3 - tf.device('/cpu:0'):Ensures the preprocessing is done on the CPU,
 step 4 - take Method:Fetches a limited number of items from the dataset for quick inspection.
 
+DOWNLOAD A PRE TRAINNED BERT MODEL FROM TENSORFLOW HUB
+Data preprocessing consists of transforming text to BERT input features:
+input_word_ids - A token id corresponde to a patcular token
+input_mask - to indicatr which is a token and which is a pedding
+segment_ids - understand sentence A and B in a pair of sentance like if else etc.
+--verval file mapping between words and their unique ids 
+--lowercasing help the model to treat likeHI is same as hi 
+
+ Tokenizing a Sentence - "hi, how are you doing?", as ['hi', '##,', 'how', 'are', 'you', 'doing', '##?']
+
+ Converting Tokens to IDs - [7632, 29623, 2129, 2024, 2017, 2725, 29632]
+
+ TOKENIZE A PRE-PROCESS TEXT FOR BERT
+
+What tf.py_function Does
+tf.py_function bridges the gap between graph mode and eager mode:
+
+It allows TensorFlow to execute Python code (to_feature) within a computational graph.
+Converts TensorFlow tensors to regular Python tensors (with .numpy() access) for the wrapped function, then maps the results back into TensorFlow tensors.
 
 Sentiment Analysis for tensorflow -
 pyhton code import and  dataset sample 
@@ -68,8 +96,7 @@ Return : Return array of tokens using regular expression
 
 
 tokenisation - The BERT tokenizer is a crucial component of the BERT (Bidirectional Encoder Representations from Transformers) model. 
-It converts input text into a numerical format suitable for the model. The tokenizer breaks down the text into smaller units called 
-tokens and maps them to corresponding IDs in the model's vocabulary. 
+It converts input text into a numerical format suitable for the model. The tokenizer breaks down the text into smaller units called tokens and maps them to corresponding IDs in the model's vocabulary. 
 i love my dog (001 , 002 , 003 , 004) i love my cat (001 , 002 , 003 , 005)
 and for encoding these sentence maitain the length by masking (adding 0)
 
@@ -77,9 +104,3 @@ INPUT MASK - Input masking in BERT plays a crucial role in ensuring that the mod
 
 and then use sigmoid fynction to get the value b/w 0-1 and set the treshold value then classify this ,
  traning and testing
-
- //is neural network creat a words (for generating text we don.t need validation data prediction)
- recurrent neural networking - recomending best data (word) that fit the missing word of the sentence 
-          it is like febunaci series
-
-recurremnt neural network -
