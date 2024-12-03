@@ -112,16 +112,45 @@ Dense Layer	- Converts features into a probability for binary classification (0 
 Model Creation - Combines the inputs, processing steps, and outputs into a cohesive model.	A structured kitchen workflow ready to produce dishes.
 
 FINE - TUNE BERT FOR TEXT CLASSIFICATION
-This section of code compiles, summarizes, and trains the BERT-based binary classification model.
+This code is a machine learning pipeline for training a binary classification model using TensorFlow and Keras. The goal is to predict a binary outcome, such as determining whether an email is spam or not spam,
+
+ (create_model):defining a pre-trained model (like BERT) and adding custom layers on top for the classification task
+ Optimizer: The Adam optimizer with a learning rate of 2e-5 (0.00002) .used for training deep learning models  and helps the model converge quickly.
+ Loss function: BinaryCrossentropy is used for binary classification,
+ Metrics: BinaryAccuracy measures the model's accuracy 
+
+Model summary: Displays the architecture of the model. Here, the model has several layers:
+
+Input layers for input_word_ids, input_mask, and input_type_ids, likely referring to tokenized text (e.g., the words in the email).
+KerasLayer (likely a pre-trained transformer model like BERT) with 109,482,241 parameters.
+A Dropout layer to prevent overfitting by randomly setting some weights to zero during training.
+The final Dense output layer produces the binary prediction (spam or not spam).
+
+Epoch 2 after epoch1:
+
+The loss has decreased to 0.1040, and the training accuracy has improved to 96.08%.
+The validation loss increased slightly to 0.1600, but the validation accuracy remains high at 95.63%.
 
 
 
 
+After training a binary classification model this script is used to evaluate the model’s performance on a validation set and make predictions on new sample data.
+plot_graphs(history, metric): This function is used to plot the training and validation metrics over the epochs.
+history.history['val_' + metric]: This represents the same metric during validation (on data the model hasn't seen before).
+plt.plot(): This is used to plot the graphs for both the training and validation metrics.
+plt.legend(): Labels the lines in the graph (training vs. validation).
 
+model.evaluate(valid_data, verbose=1): This evaluates the trained model on a validation dataset (valid_data),  which contains unseen data .It calculates the loss and accuracy metrics based on the model’s predictions for the validation set.
 
+Making Predictions on New Data
+sample_example: This is a list of new, unseen sample text data (e.g., new emails) that you want to make predictions for
+tf.data.Dataset.from_tensor_slices: This converts the sample examples and their corresponding labels (in this case, labels are set to 0, representing "not spam") into a TensorFlow dataset. It's needed because TensorFlow expects datasets to be in this format for predictions.
+test_data.map(to_feature_map):  convert raw text into the feature representation 
+batch(1): This batches the data into groups of size 1. 
+model.predict(test_data): This is where the model makes predictions on the new sample data. It outputs a prediction score for each sample, which will be a value between 0 and 1
 
-
-
+Pred >= 0.5: The email is predicted to be spam (or "toxic" in the example).
+Pred < 0.5: The email is predicted to be not spam (or "sincere").
 
 Sentiment Analysis for tensorflow -
 pyhton code import and  dataset sample 
